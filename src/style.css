@@ -577,4 +577,4 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
 
-.brand-logo{display:block;width:56px;height:56px;flex:0 0 56px;object-fit:contain;border-radius:15px;background:#fff;border:1px solid var(--line);padding:2px;}
+.brand-logo{display:block;width:64px;height:64px;flex:0 0 64px;object-fit:contain;border-radius:0;background:transparent;border:0;padding:0;}
