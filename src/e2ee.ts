@@ -100,7 +100,7 @@ export async function initializeAccountE2EEKey(
 ): Promise<void> {
   if (!password) throw new Error("Enter your password to securely prepare messaging on this device.");
   const storageKey=KEY_STORAGE_PREFIX+userId;
-  const profile=await supabase.from("profiles").select("e2ee_private_key_backup,e2ee_backup_salt").eq("id",userId).maybeSingle();
+  const profile=await supabase.from("profiles").select("e2ee_private_key_backup,e2ee_backup_salt,e2ee_public_key").eq("id",userId).maybeSingle();
   if(profile.error) throw new Error("Secure key backup setup failed: "+profile.error.message);
   const backup=profile.data?.e2ee_private_key_backup as string|undefined;
   const saltText=profile.data?.e2ee_backup_salt as string|undefined;
@@ -110,21 +110,7 @@ export async function initializeAccountE2EEKey(
     try { privateJwk=await restoreKeyFromPassword(backup,password,salt); }
     catch { throw new Error("Could not unlock your messaging key. Check your password. Your existing messages have not been changed."); }
     const privateKey=await crypto.subtle.importKey("jwk",privateJwk,{name:"ECDH",namedCurve:"P-256"},false,["deriveKey","deriveBits"]);
-    const publicJwk=JSON.parse(String(profile.data?.e2ee_public_key||"null"));
-    // Public key is also kept locally with the restored private key.
-    const local=localStorage.getItem(storageKey);
-    let publicKey:string;
-    try { publicKey=local?JSON.parse(local).publicKey:""; } catch { publicKey=""; }
-    if(!publicKey){
-      // Reconstruct public JWK coordinates from the matching profile public key.
-      const pub=await supabase.from("profiles").select("e2ee_public_key").eq("id",userId).maybeSingle();
-      publicKey=pub.data?.e2ee_public_key||"";
-    }
-    if(!publicKey||!publicJwk) {
-      // fallback to public key returned separately below
-      const pub=await supabase.from("profiles").select("e2ee_public_key").eq("id",userId).maybeSingle();
-      publicKey=pub.data?.e2ee_public_key||"";
-    }
+    const publicKey=profile.data?.e2ee_public_key as string|undefined;
     if(!publicKey) throw new Error("Your account's public messaging key is missing. Keep the original device and contact support before resetting keys.");
     localStorage.setItem(storageKey,JSON.stringify({publicKey,privateKey:privateJwk}));
     return;
