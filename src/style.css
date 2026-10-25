@@ -662,3 +662,28 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 .room-message-actions{display:flex;align-items:center;gap:12px;margin-top:5px}.delete-message-action{color:#d23c4b}.delete-message-action:hover{background:#fff0f1}
 
 .community-composer-heading{padding:2px 0 12px}.community-composer-heading h2{margin:0;font-size:17px;color:#173b5d}.community-composer-heading p{margin:5px 0 0;font-size:12px;color:#68809a;line-height:1.5}
+
+
+/* Community home polish: compact welcome banner, online count aligned right,
+   and post composer remains after the Community posts feed. */
+.home-welcome{padding:18px 24px;gap:16px;margin-bottom:14px;border-radius:20px}
+.home-welcome .eyebrow{font-size:10px;letter-spacing:.09em}
+.home-welcome h2{font-size:clamp(23px,2.7vw,32px);line-height:1.12;letter-spacing:-.8px;margin:4px 0 6px}
+.home-welcome p{font-size:13px;line-height:1.45}
+.welcome-stats{flex-direction:row;align-items:center;justify-content:center;gap:8px;padding:10px 15px;min-width:0;white-space:nowrap;border-radius:999px;background:#ffffffdf}
+.welcome-stats>b{font-size:16px;line-height:1}
+.welcome-stats small{font-size:11px;margin:0}
+.composer{margin-top:16px}
+.community-composer-heading h2{font-size:17px}
+@media(max-width:680px){
+ .home-welcome{padding:15px 14px;gap:10px;align-items:center;margin-bottom:12px;border-radius:16px}
+ .home-welcome .eyebrow{font-size:9px}
+ .home-welcome h2{font-size:21px;letter-spacing:-.45px;margin:3px 0 5px}
+ .home-welcome p{font-size:11px;line-height:1.35}
+ .welcome-stats{padding:8px 10px;gap:5px;flex-shrink:0}
+ .welcome-stats>b{font-size:14px}
+ .welcome-stats small{font-size:9px}
+ .composer{margin-top:14px;margin-bottom:20px}
+ .community-composer-heading h2{font-size:16px}
+ .community-composer-heading p{font-size:11px}
+}
