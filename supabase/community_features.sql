@@ -2,11 +2,10 @@
 -- Run in Supabase SQL Editor after schema.sql. Safe to re-run.
 create extension if not exists pgcrypto;
 
-alter table public.conversations add column if not exists conversation_type text not null default 'direct'
-  check (conversation_type in ('direct','group'));
+alter table public.conversations add column if not exists conversation_type text not null default 'private'
+  check (conversation_type in ('global','private','group'));
 alter table public.conversations add column if not exists title text;
-create unique index if not exists one_direct_conversation_per_pair
-  on public.conversations (id) where conversation_type = 'direct';
+-- Conversation IDs are already unique; private chats use conversation_type = 'private'.
 
 -- Avoid recursive RLS when checking conversation membership.
 create or replace function public.is_conversation_member(p_conversation uuid, p_user uuid default auth.uid())
@@ -33,11 +32,11 @@ begin
   from public.conversations c
   join public.conversation_members a on a.conversation_id=c.id and a.user_id=auth.uid()
   join public.conversation_members b on b.conversation_id=c.id and b.user_id=p_friend
-  where c.conversation_type='direct'
+  where c.conversation_type='private'
   limit 1;
 
   if v_conversation is null then
-    insert into public.conversations(conversation_type) values ('direct') returning id into v_conversation;
+    insert into public.conversations(conversation_type) values ('private') returning id into v_conversation;
     insert into public.conversation_members(conversation_id,user_id)
       values (v_conversation,auth.uid()),(v_conversation,p_friend);
   end if;
