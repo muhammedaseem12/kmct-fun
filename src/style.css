@@ -576,3 +576,5 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
  html{scroll-behavior:auto}
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
 }
+
+.brand-logo{display:block;width:44px;height:44px;flex:0 0 44px;object-fit:contain;border-radius:15px;background:#fff;border:1px solid var(--line);padding:3px;}
