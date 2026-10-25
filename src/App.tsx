@@ -4,8 +4,8 @@ import { House, Image, MessageCircle, Users, CalendarDays, Bell, Search, LogIn, 
 import "./style.css";
 import { ensureE2EEKeyPair, encryptChatPayload, decryptChatPayload } from "./e2ee";
 
-const URL = import.meta.env.VITE_SUPABASE_URL || "";
-const KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || "";
+const URL = import.meta.env.VITE_SUPABASE_URL || "https://mfbchgeepnzdcnobylmg.supabase.co";
+const KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || "sb_publishable_IoJSHLPj43xJxHNg3uGaMg_340eURsT";
 const supabase: SupabaseClient = createClient(URL, KEY);
 type Post = {id:string;author_id:string;kind:string;body:string;image_url?:string|null;is_anonymous:boolean;poll_options:any;created_at:string;username?:string;likes?:number;liked?:boolean;comments?:number};
 type Page = "feed"|"memes"|"chat"|"people"|"events"|"alerts"|"profile";
