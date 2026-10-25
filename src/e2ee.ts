@@ -122,6 +122,7 @@ export async function initializeAccountE2EEKey(
   if(existing){
     const parsed=JSON.parse(existing); privateJwk=parsed.privateKey; publicKey=parsed.publicKey;
   } else {
+    if(profile.data?.e2ee_public_key) throw new Error("This account already has a messaging key but no cross-device backup yet. Sign in on the original device first to create the secure backup; do not clear its browser data.");
     const pair=await crypto.subtle.generateKey({name:"ECDH",namedCurve:"P-256"},true,["deriveKey","deriveBits"]);
     const publicJwk=await crypto.subtle.exportKey("jwk",pair.publicKey);
     privateJwk=await crypto.subtle.exportKey("jwk",pair.privateKey);
