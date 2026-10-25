@@ -578,3 +578,32 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 }
 
 .brand-logo{display:block;width:64px;height:64px;flex:0 0 64px;object-fit:contain;border-radius:0;background:transparent;border:0;padding:0;}
+
+
+/* Home layout refinement: compact welcome, prominent chat, smaller post composer */
+.home-welcome{padding:14px 20px!important;gap:14px!important;margin:8px 0 12px!important;border-radius:18px!important}
+.home-welcome h2{font-size:clamp(22px,2.5vw,30px)!important;line-height:1.08!important;margin:7px 0!important;letter-spacing:-.8px!important}
+.home-welcome p{font-size:12px!important;line-height:1.45!important;margin:7px 0 0!important}
+.home-welcome .welcome-stats{padding:10px 14px!important;min-width:150px!important;border-radius:16px!important}
+.home-welcome .welcome-stats b{font-size:23px!important}
+.home-welcome .welcome-stats small{font-size:11px!important}
+.community-room.community-preview{min-height:390px!important;margin:12px 0 16px!important}
+.community-preview .community-room-head{padding:17px 20px!important;min-height:84px!important}
+.community-preview .community-room-messages{min-height:230px!important;max-height:310px!important;padding:16px 18px!important}
+.community-preview .community-room-form{padding:10px 14px 12px!important}
+.community-preview .room-input-row input{min-height:42px!important}
+.composer.panel{padding:11px 13px!important;margin-bottom:20px!important}
+.composer-title .avatar{width:34px!important;height:34px!important;flex:0 0 34px!important}
+.composer-title textarea{min-height:42px!important;max-height:72px!important;padding:5px 7px!important;font-size:13px!important}
+.composer-types{gap:5px!important;padding-bottom:7px!important}
+.composer-types button{padding:6px 9px!important;font-size:11px!important;border-radius:8px!important}
+.composer-footer{font-size:11px!important}
+.composer-footer .button{padding:7px 10px!important;font-size:11px!important;gap:5px!important;border-radius:9px!important}
+@media(max-width:640px){
+ .home-welcome{padding:12px 14px!important}
+ .home-welcome h2{font-size:23px!important}
+ .home-welcome .welcome-stats{min-width:0!important}
+ .community-room.community-preview{min-height:340px!important}
+ .community-preview .community-room-messages{min-height:205px!important;max-height:42vh!important}
+ .composer.panel{padding:9px!important}
+}
