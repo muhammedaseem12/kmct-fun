@@ -660,3 +660,5 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 }
 
 .room-message-actions{display:flex;align-items:center;gap:12px;margin-top:5px}.delete-message-action{color:#d23c4b}.delete-message-action:hover{background:#fff0f1}
+
+.community-composer-heading{padding:2px 0 12px}.community-composer-heading h2{margin:0;font-size:17px;color:#173b5d}.community-composer-heading p{margin:5px 0 0;font-size:12px;color:#68809a;line-height:1.5}
