@@ -658,3 +658,5 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
  .mobile-nav .nav-icon-wrap{position:relative}
  .unread-chat-dot,.nav-unread-dot{background:#ef3340}
 }
+
+.room-message-actions{display:flex;align-items:center;gap:12px;margin-top:5px}.delete-message-action{color:#d23c4b}.delete-message-action:hover{background:#fff0f1}
