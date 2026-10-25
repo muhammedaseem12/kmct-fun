@@ -609,3 +609,5 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 }
 
 .signup-confirm-box{display:grid;gap:6px;margin:18px 0 8px;padding:14px 16px;background:#e8f8ed;border:1px solid #a9dfb7;border-radius:8px;color:#176534;font-size:13px;line-height:1.5}.signup-confirm-box strong{font-size:14px}.signup-confirm-box span{overflow-wrap:anywhere}
+
+.presence-label{font-size:10px;color:#8793a3;font-weight:600}.presence-label.is-online{color:#12966b}
