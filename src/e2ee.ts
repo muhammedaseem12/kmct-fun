@@ -2,6 +2,11 @@ const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 const KEY_STORAGE_PREFIX = "kmct-e2ee-private-v1:";
 
+export function hasLocalE2EEKey(userId: string): boolean {
+  return Boolean(localStorage.getItem(KEY_STORAGE_PREFIX + userId));
+}
+
+
 function toBase64(bytes: Uint8Array): string {
   let binary = "";
   bytes.forEach((b) => { binary += String.fromCharCode(b); });
