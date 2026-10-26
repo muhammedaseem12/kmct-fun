@@ -110,8 +110,16 @@ export async function initializeAccountE2EEKey(
     try { privateJwk=await restoreKeyFromPassword(backup,password,salt); }
     catch { throw new Error("Could not unlock your messaging key. Check your password. Your existing messages have not been changed."); }
     const privateKey=await crypto.subtle.importKey("jwk",privateJwk,{name:"ECDH",namedCurve:"P-256"},false,["deriveKey","deriveBits"]);
-    const publicKey=profile.data?.e2ee_public_key as string|undefined;
-    if(!publicKey) throw new Error("Your account's public messaging key is missing. Keep the original device and contact support before resetting keys.");
+    // Reconstruct the matching public key from the backed-up private JWK. Do not
+    // trust the profile public key alone: an earlier client could have overwritten it.
+    if(!privateJwk.x||!privateJwk.y||!privateJwk.crv) throw new Error("Your encrypted messaging backup is incomplete. Keep the original device; do not reset messaging keys.");
+    const publicJwk:JsonWebKey={kty:"EC",crv:privateJwk.crv,x:privateJwk.x,y:privateJwk.y,ext:true,key_ops:[]};
+    const publicKey=JSON.stringify(publicJwk);
+    const currentPublicKey=profile.data?.e2ee_public_key as string|undefined;
+    if(currentPublicKey!==publicKey){
+      const repaired=await supabase.from("profiles").update({e2ee_public_key:publicKey}).eq("id",userId);
+      if(repaired.error) throw new Error("Your secure messaging key was restored locally but could not sync to your profile: "+repaired.error.message);
+    }
     localStorage.setItem(storageKey,JSON.stringify({publicKey,privateKey:privateJwk}));
     return;
   }
