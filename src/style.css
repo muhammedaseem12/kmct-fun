@@ -739,3 +739,10 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 .bubble .private-message-delete:hover{background:#fff0f1;border-color:#efc4ca;color:#c52e42}
 .community-room-messages{scroll-behavior:smooth;overscroll-behavior:contain}
 @media(max-width:680px){.room-message-actions .reply-action{min-height:32px;padding:7px 11px}.bubble .private-message-delete{width:30px;height:30px}}
+
+
+/* Private chat: keep the message list pinned to the latest message after send, receive, or image load. */
+.chat-pane .messages{scroll-behavior:smooth;overscroll-behavior:contain;scroll-padding-bottom:16px}
+.private-chat-image{display:block;width:auto;max-width:min(100%,320px);max-height:420px;object-fit:contain;border-radius:12px;margin:4px 0;cursor:zoom-in}
+.bubble:has(.private-chat-image){max-width:min(88%,360px);padding:10px 12px 42px}
+@media(max-width:680px){.private-chat-image{max-width:min(100%,260px);max-height:340px}.bubble:has(.private-chat-image){max-width:88%}}
