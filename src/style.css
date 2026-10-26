@@ -779,3 +779,72 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 .chat-pane .private-photo-preview-info{overflow:hidden}
 .chat-pane .private-photo-preview-actions .button{flex:0 0 auto;width:auto}
 @media(max-width:680px){.chat-pane .send-form{gap:6px}.chat-pane .send-form>.private-photo-preview{padding:9px}.chat-pane .private-photo-preview-info strong{font-size:12px}.chat-pane .private-photo-preview-actions{gap:6px}.chat-pane .private-photo-preview-actions .button{min-height:36px;padding:7px 10px}.chat-pane .send-form>.private-message-send{padding:0 10px;font-size:12px}.chat-pane .send-form>.private-voice-button{min-width:44px}}
+
+
+/* Mobile private-chat composer repair: keep the text box wide and controls on deliberate grid tracks. */
+@media(max-width:680px){
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form{
+  display:grid!important;
+  grid-template-columns:42px minmax(0,1fr) auto;
+  align-items:center;
+  gap:8px;
+  width:100%;
+  min-width:0;
+  padding:10px 10px calc(10px + env(safe-area-inset-bottom));
+ }
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form>.private-photo-preview{
+  grid-column:1/-1;
+  grid-row:1;
+  width:100%;
+  min-width:0;
+  margin:0 0 2px;
+ }
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form>.private-photo-pick{
+  grid-column:1;
+  grid-row:1;
+  width:42px;
+  min-width:42px;
+  height:44px;
+  padding:0;
+  font-size:0;
+ }
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form>.private-message-input{
+  grid-column:2;
+  grid-row:1;
+  display:block;
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%;
+  height:44px;
+  flex:none;
+  padding:12px 13px;
+  border:1px solid #d9eafa;
+  border-radius:12px;
+  background:#f6faff;
+  font-size:14px;
+ }
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form>.private-message-send{
+  grid-column:3;
+  grid-row:1;
+  min-width:64px;
+  height:44px;
+  padding:0 12px;
+  border-radius:12px;
+ }
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form>.private-voice-button{
+  grid-column:1;
+  grid-row:2;
+  justify-self:start;
+  min-width:42px;
+  height:42px;
+  padding:0 10px;
+  border-radius:12px;
+  font-size:0;
+ }
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form:has(.private-photo-preview)>.private-photo-pick{grid-row:2}
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form:has(.private-photo-preview)>.private-message-input{grid-row:2}
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form:has(.private-photo-preview)>.private-message-send{grid-row:2}
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form:has(.private-photo-preview)>.private-voice-button{grid-row:3}
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form>.recording-dot{grid-column:2;grid-row:2}
+ .chat-workspace .chat-layout.conversation-open .chat-pane .send-form:has(.private-photo-preview)>.recording-dot{grid-row:3}
+}
