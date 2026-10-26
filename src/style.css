@@ -757,3 +757,13 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 .private-photo-preview-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:3px}
 .private-photo-preview-actions .button{min-height:34px;padding:7px 11px;font-size:12px}
 @media(max-width:680px){.private-photo-preview>img{width:64px;height:64px}.private-photo-preview{gap:9px;padding:8px}.private-photo-preview-actions .button{min-height:36px}}
+
+
+/* Fix mobile private-chat composer: put the selected photo preview on its own full-width row. */
+.chat-pane .send-form{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-width:0}
+.chat-pane .send-form>.private-photo-preview{flex:0 0 100%;width:100%;max-width:100%;order:-1;margin:0 0 2px;min-width:0}
+.chat-pane .send-form>input:not([type="file"]){min-width:0;flex:1 1 120px}
+.chat-pane .send-form>.button{flex:0 0 auto;min-width:42px;justify-content:center;white-space:nowrap}
+.chat-pane .private-photo-preview-info{overflow:hidden}
+.chat-pane .private-photo-preview-actions .button{flex:0 0 auto;width:auto}
+@media(max-width:680px){.chat-pane .send-form{gap:6px}.chat-pane .send-form>.private-photo-preview{padding:9px}.chat-pane .private-photo-preview-info strong{font-size:12px}.chat-pane .private-photo-preview-actions{gap:6px}.chat-pane .private-photo-preview-actions .button{min-height:36px;padding:7px 10px}}
