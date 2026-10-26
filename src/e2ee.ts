@@ -51,14 +51,38 @@ export async function encryptChatPayload(userId: string, peerPublicKey: string, 
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const bytes = data instanceof Uint8Array ? data : new Uint8Array(data);
   const ciphertext = await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, bytes);
-  return "E2EE1:" + JSON.stringify({ iv: toBase64(iv), data: toBase64(new Uint8Array(ciphertext)) });
+  // Bind both participants' public keys to this ciphertext. This makes future
+  // messages decryptable on another device after the password-encrypted key is restored,
+  // even if a profile's current public key later changes.
+  return "E2EE2:" + JSON.stringify({
+    senderPublicKey: own.publicKey,
+    recipientPublicKey: peerPublicKey,
+    iv: toBase64(iv),
+    data: toBase64(new Uint8Array(ciphertext)),
+  });
 }
 
 export async function decryptChatPayload(userId: string, peerPublicKey: string, value: string): Promise<Uint8Array> {
-  if (!value.startsWith("E2EE1:")) throw new Error("This message is not end-to-end encrypted.");
-  const payload = JSON.parse(value.slice(6));
   const own = await ensureE2EEKeyPair(userId);
-  const key = await deriveAesKey(own.privateKey, peerPublicKey);
+  let payload: { iv: string; data: string; senderPublicKey?: string; recipientPublicKey?: string };
+  let keyPeer = peerPublicKey;
+  if (value.startsWith("E2EE2:")) {
+    payload = JSON.parse(value.slice(6));
+    // Determine which participant this device represents. Use the exact key
+    // captured when the message was encrypted, not today's profile key.
+    if (own.publicKey === payload.senderPublicKey && payload.recipientPublicKey) {
+      keyPeer = payload.recipientPublicKey;
+    } else if (own.publicKey === payload.recipientPublicKey && payload.senderPublicKey) {
+      keyPeer = payload.senderPublicKey;
+    } else {
+      throw new Error("This device's key does not match the keys stored with this message.");
+    }
+  } else if (value.startsWith("E2EE1:")) {
+    payload = JSON.parse(value.slice(6));
+  } else {
+    throw new Error("This message is not end-to-end encrypted.");
+  }
+  const key = await deriveAesKey(own.privateKey, keyPeer);
   const plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: fromBase64(payload.iv) }, key, fromBase64(payload.data));
   return new Uint8Array(plain);
 }
