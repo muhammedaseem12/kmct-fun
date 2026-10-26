@@ -699,3 +699,35 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 
 /* Private chat photo messages */
 .private-chat-image{display:block;width:auto;max-width:min(100%,320px);max-height:360px;object-fit:contain;border-radius:12px;margin:4px 0;cursor:zoom-in}.send-form .button{white-space:nowrap}.send-form input[type="text"]{min-width:0}
+
+
+/* Private chat final UI polish: keep the conversation focused and controls tidy */
+.chat-workspace:has(.chat-layout.conversation-open) .chat-friends-tools{display:none}
+.chat-workspace .chat-layout{margin-top:8px}
+.chat-pane{min-width:0}
+.bubble{position:relative;min-width:86px;padding:11px 13px 8px}
+.bubble>p{margin:0 0 3px}
+.bubble>small{display:inline-block;vertical-align:middle;margin:4px 5px 0 0;line-height:1.4}
+.private-message-delete{display:inline-grid;vertical-align:middle;place-items:center;width:25px;height:25px;margin:0 0 0 3px;padding:0;border:1px solid #dce8f3;border-radius:8px;background:#ffffffc9;color:#8b93a5;box-shadow:none}
+.private-message-delete:hover{background:#fff0f1;border-color:#f6c9ce;color:#cf3446}
+.bubble.mine .private-message-delete{background:#ffffffb8;border-color:#d5e6f7;color:#607b96}
+.bubble.mine .private-message-delete:hover{background:#fff0f1;border-color:#f6c9ce;color:#cf3446}
+.messages{scrollbar-width:thin;scrollbar-color:#d6d9e8 transparent}
+.chat-back{width:38px;height:38px;border-radius:12px}
+.send-form{flex-wrap:nowrap}
+.send-form input[type="text"]{flex:1;min-width:0;width:auto}
+@media(max-width:680px){
+ .chat-workspace:has(.chat-layout.conversation-open){padding:0!important;border:0!important;box-shadow:none!important;background:transparent!important}
+ .chat-workspace:has(.chat-layout.conversation-open) .chat-layout{margin:0;border:1px solid #dce9f5;border-radius:18px;overflow:hidden}
+ .chat-workspace .chat-layout.conversation-open .chat-pane{height:calc(100dvh - 150px);min-height:420px;max-height:none}
+ .chat-workspace .chat-layout.conversation-open .messages{padding:15px 12px 20px}
+ .chat-workspace .chat-layout.conversation-open .send-form{display:grid;grid-template-columns:42px minmax(0,1fr) auto;gap:7px;padding:10px 9px calc(10px + env(safe-area-inset-bottom))}
+ .chat-workspace .chat-layout.conversation-open .send-form input[type="file"]{display:none}
+ .chat-workspace .chat-layout.conversation-open .send-form input[type="text"]{grid-column:2;grid-row:1;min-width:0;width:100%;padding:12px 13px}
+ .chat-workspace .chat-layout.conversation-open .send-form .button.secondary{grid-column:1;grid-row:1;padding:0;width:42px;min-width:42px;font-size:0;gap:0}
+ .chat-workspace .chat-layout.conversation-open .send-form .button.primary{grid-column:3;grid-row:1;padding:0 13px;min-width:68px}
+ .chat-workspace .chat-layout.conversation-open .send-form .button:last-of-type{grid-column:1/-1;grid-row:2;justify-self:start;min-width:42px}
+ .chat-workspace .chat-layout.conversation-open .send-form .recording-dot{grid-column:2;grid-row:2}
+ .chat-workspace .chat-layout.conversation-open .bubble{max-width:88%;padding:10px 12px 7px}
+ .chat-workspace .chat-layout.conversation-open .private-message-delete{width:26px;height:26px}
+}
