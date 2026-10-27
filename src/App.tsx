@@ -26,6 +26,14 @@ function EventsBannerAd(){
  useEffect(()=>{
   const container=containerRef.current;
   if(!container)return;
+  // The ad provider requires its options to exist before its script executes.
+  (window as any).atOptions={
+   key:"7c49bccee3efbf6ab0b68cbae963492d",
+   format:"iframe",
+   height:90,
+   width:728,
+   params:{}
+  };
   const script=document.createElement("script");
   script.async=true;
   script.setAttribute("data-cfasync","false");
@@ -33,11 +41,14 @@ function EventsBannerAd(){
   script.dataset.kmctEventsAd="true";
   container.replaceChildren();
   container.parentElement?.insertBefore(script,container);
-  return()=>{script.remove();container.replaceChildren()};
+  return()=>{
+   script.remove();
+   container.replaceChildren();
+   delete (window as any).atOptions;
+  };
  },[]);
  return <div className="events-banner-ad" aria-label="Advertisement"><div ref={containerRef}/></div>;
 }
-
 import { decryptChatPayload, hasLocalE2EEKey } from "./e2ee";
 
 const URL = import.meta.env.VITE_SUPABASE_URL || "https://mfbchgeepnzdcnobylmg.supabase.co";
