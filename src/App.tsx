@@ -8,11 +8,13 @@ function CommunityPostsAd(){
  useEffect(()=>{
   const container=containerRef.current;
   if(!container)return;
-  // The provider expects its script immediately before the target container.
+  // Keep the provider script directly before its required target container.
   const script=document.createElement("script");
   script.async=true;
   script.setAttribute("data-cfasync","false");
   script.src="https://bicea.org/21/cc969e3f8d0d62c82c10cc00d8d133ba";
+  script.dataset.kmctAd="true";
+  container.replaceChildren();
   container.parentElement?.insertBefore(script,container);
   return()=>{script.remove();container.replaceChildren()};
  },[]);
