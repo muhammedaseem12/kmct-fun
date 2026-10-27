@@ -861,3 +861,10 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 .public-browse-label{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid #dce9f5;border-radius:999px;background:#f7fbff;color:#4b6882;font-size:11px;font-weight:700;white-space:nowrap}
 .public-chat-notice{margin:10px 12px 12px;padding:11px 13px;border:1px solid #dce9f5;border-radius:12px;background:#f7fbff;color:#5a7188;font-size:12px;line-height:1.5}
 .post-actions>span{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;color:#667b91;font-size:12px}
+
+/* Mobile General Chat scrolling fix */
+.community-room-messages{min-height:0;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
+.community-room.community-expanded{height:calc(100dvh - 24px);height:calc(100vh - 24px);}
+.community-room.community-expanded .community-room-messages{flex:1 1 0%;min-height:0;height:0;overflow-y:scroll!important;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
+.community-room.community-expanded .community-room-form{flex-shrink:0;}
+@media(max-width:640px){.community-room.community-expanded{height:calc(100dvh - 80px - env(safe-area-inset-bottom))!important;max-height:calc(100dvh - 80px - env(safe-area-inset-bottom))!important;overflow:hidden!important;}.community-room.community-expanded .community-room-messages{min-height:0!important;max-height:none!important;height:0;flex:1 1 0%;overflow-y:scroll!important;touch-action:pan-y;-webkit-overflow-scrolling:touch;}.community-room.community-expanded .community-room-form{position:relative!important;bottom:auto!important;}}
