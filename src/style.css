@@ -855,3 +855,9 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 .community-posts-ad>div{display:flex;justify-content:center;align-items:center;max-width:100%;min-width:0}
 .community-posts-ad iframe{display:block;max-width:100%;border:0}
 @media(max-width:480px){.community-posts-ad{margin:14px auto 18px;padding:8px;border-radius:12px}}
+
+
+/* Public, read-only mode after removing login/account features. */
+.public-browse-label{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid #dce9f5;border-radius:999px;background:#f7fbff;color:#4b6882;font-size:11px;font-weight:700;white-space:nowrap}
+.public-chat-notice{margin:10px 12px 12px;padding:11px 13px;border:1px solid #dce9f5;border-radius:12px;background:#f7fbff;color:#5a7188;font-size:12px;line-height:1.5}
+.post-actions>span{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;color:#667b91;font-size:12px}
