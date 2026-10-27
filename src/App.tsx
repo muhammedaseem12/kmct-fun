@@ -8,16 +8,16 @@ function CommunityPostsAd(){
  useEffect(()=>{
   const container=containerRef.current;
   if(!container)return;
+  // The provider expects its script immediately before the target container.
   const script=document.createElement("script");
   script.async=true;
   script.setAttribute("data-cfasync","false");
   script.src="https://bicea.org/21/cc969e3f8d0d62c82c10cc00d8d133ba";
-  document.body.appendChild(script);
+  container.parentElement?.insertBefore(script,container);
   return()=>{script.remove();container.replaceChildren()};
  },[]);
  return <div className="community-posts-ad" aria-label="Advertisement"><div id="container-cc969e3f8d0d62c82c10cc00d8d133ba" ref={containerRef}/></div>;
 }
-
 import { ensureE2EEKeyPair, encryptChatPayload, decryptChatPayload, initializeAccountE2EEKey, hasLocalE2EEKey } from "./e2ee";
 
 const URL = import.meta.env.VITE_SUPABASE_URL || "https://mfbchgeepnzdcnobylmg.supabase.co";
