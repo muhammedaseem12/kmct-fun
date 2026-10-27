@@ -868,3 +868,8 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
 .community-room.community-expanded .community-room-messages{flex:1 1 0%;min-height:0;height:0;overflow-y:scroll!important;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y;}
 .community-room.community-expanded .community-room-form{flex-shrink:0;}
 @media(max-width:640px){.community-room.community-expanded{height:calc(100dvh - 80px - env(safe-area-inset-bottom))!important;max-height:calc(100dvh - 80px - env(safe-area-inset-bottom))!important;overflow:hidden!important;}.community-room.community-expanded .community-room-messages{min-height:0!important;max-height:none!important;height:0;flex:1 1 0%;overflow-y:scroll!important;touch-action:pan-y;-webkit-overflow-scrolling:touch;}.community-room.community-expanded .community-room-form{position:relative!important;bottom:auto!important;}}
+
+/* Events page banner ad: centered and constrained on small screens. */
+.events-banner-ad{width:100%;max-width:728px;min-height:90px;margin:16px auto;display:flex;justify-content:center;align-items:center;overflow:hidden;box-sizing:border-box;}
+.events-banner-ad iframe{max-width:100%;border:0;}
+@media(max-width:760px){.events-banner-ad{min-height:90px;padding:0 8px;}.events-banner-ad iframe{width:100%;max-width:100%;}}
