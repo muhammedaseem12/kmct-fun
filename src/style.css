@@ -848,3 +848,10 @@ button,a,input,textarea{ -webkit-tap-highlight-color:transparent }
  .chat-workspace .chat-layout.conversation-open .chat-pane .send-form>.recording-dot{grid-column:2;grid-row:2}
  .chat-workspace .chat-layout.conversation-open .chat-pane .send-form:has(.private-photo-preview)>.recording-dot{grid-row:3}
 }
+
+
+/* Third-party banner placement below the Community posts feed. */
+.community-posts-ad{display:flex;justify-content:center;align-items:center;min-height:50px;width:100%;max-width:100%;margin:18px auto 22px;padding:10px;box-sizing:border-box;overflow:hidden;border:1px solid #e6edf5;border-radius:14px;background:#fbfdff}
+.community-posts-ad>div{display:flex;justify-content:center;align-items:center;max-width:100%;min-width:0}
+.community-posts-ad iframe{display:block;max-width:100%;border:0}
+@media(max-width:480px){.community-posts-ad{margin:14px auto 18px;padding:8px;border-radius:12px}}
